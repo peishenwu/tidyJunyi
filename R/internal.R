@@ -111,22 +111,6 @@ unique.query <- function(query){
                 GROUP BY ",paste(getQueryColumns(query),collapse = ","),sep=""))
 }#end function
 
-##given year, generate all week numbers
-yr_weeknum <- function(yr){
-  init <- as.Date(paste(yr,"-",1,"-",1:7,sep=""))
-  #the first Sunday is beginning of week2
-  #ref:: https://cloud.google.com/bigquery/docs/reference/legacy-sql#week
-  sec_wk <- c(1:7)[weekdays(init, abbreviate = T) == "日"]
-  sec_init <- init[sec_wk]
-
-  result <- data.frame(timestamp = paste(yr,"/",c(paste("0",1:9,sep=""),10:53),sep=""),
-                       from = as.Date(sec_init) + 7*c(-1:51),
-                       to = as.Date(sec_init) + 7*c(0:52))
-
-  return(result)
-}#end function
-
-##
 ##utility functions to use for junyi's dplyr alternatives
 
 extract_and_modify_sql <- function(tbl){
