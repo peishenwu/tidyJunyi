@@ -26,17 +26,19 @@ tbl_log_VideoProb <- function(force = F, window.begin = NULL, window.end = NULL)
   #
   q.prob <- paste("SELECT user.email AS user_primary_key, 'prob' AS eventType, ip_address AS IP,
                           points_earned, earned_proficiency AS proficiency_status, 0 AS video_complete_status, time_taken AS time_consumed,
-                          exercise AS eventID, DATE_ADD(time_done, 8, 'HOUR') AS timestamp
+                          exercise AS eventID, time_done AS timestamp
                    FROM junyi_",dataset.date,".ProblemLog_",dataset.date,sep="")
 
   q.video <- paste("SELECT user.email AS user_primary_key, 'video' AS eventType, ip_address AS IP,
                            points_earned, is_video_completed AS video_complete_status, 0 AS proficiency_status, seconds_watched AS time_consumed,
-                           youtube_id AS eventID, DATE_ADD(time_watched, 8, 'HOUR') AS timestamp
+                           youtube_id AS eventID, time_watched AS timestamp
                     FROM junyi_",dataset.date,".VideoLog_",dataset.date,sep="")
   ##
   q.total <- paste("SELECT user_primary_key, points_earned, proficiency_status, video_complete_status, eventID, eventType, IP,
-                           DATE(DATE_ADD(timestamp, 8, 'HOUR')) AS date, timestamp, time_consumed,
-                           WEEK(timestamp) AS week_of_year, YEAR(timestamp) AS year,
+                           time_consumed, DATE_ADD(timestamp, 8, 'HOUR') AS timestamp,
+                           DATE(DATE_ADD(timestamp, 8, 'HOUR')) AS date,
+                           WEEK(DATE_ADD(timestamp, 8, 'HOUR')) AS week_of_year,
+                           YEAR(DATE_ADD(timestamp, 8, 'HOUR')) AS year,
                            MONTH(DATE_ADD(timestamp, 8, 'HOUR')) AS month,
                            DAYOFWEEK(DATE_ADD(timestamp, 8, 'HOUR')) AS weekday,
                            HOUR(DATE_ADD(timestamp, 8, 'HOUR')) AS hour,
