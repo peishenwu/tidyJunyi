@@ -2,14 +2,12 @@
 #' @description  log data of mission assignment, the minimal time unit for each row is every 10 mins. The primary key for each mission is missionID
 #' @param force create a new data table despite a previous table with a same name already exist
 #' @return returns dplyr tbl object
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 #' @export
 
 tbl_log_AssignMission <- function(force = F){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 

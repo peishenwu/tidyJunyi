@@ -4,14 +4,12 @@
 #' @param window.begin the date to begin watching, in format yy/mm/dd
 #' @param window.end the date to end watching, in format yy/mm/dd
 #' @return returns dplyr tbl object
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 #' @export
 
 tbl_log_VideoProb <- function(force = F, window.begin = NULL, window.end = NULL){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 

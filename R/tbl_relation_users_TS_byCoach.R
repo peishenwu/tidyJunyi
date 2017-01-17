@@ -2,15 +2,13 @@
 #' @description  teacher and student relationships, defined by coach-trainee relationship
 #' @param force create a new data table despite a previous table with a same name already exist
 #' @return returns dplyr tbl object
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 #' @export
 #'
 
 tbl_relation_users_TS_byCoach <- function(force = F){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 

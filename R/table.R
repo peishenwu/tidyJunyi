@@ -3,14 +3,12 @@
 #' @param x see ?table for details, this can also be tbl objects
 #' @param column the column containing values to be calculated
 #' @param n how many items to show, by default is 5000.
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 #' @export
 
 table <- function(x, column, n = 5000){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   ##support for NSE

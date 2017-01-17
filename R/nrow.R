@@ -1,9 +1,6 @@
 #' helper functions that make tbl objects like data.frames
 #' @description  an alternative nrow which works for tbl objects
 #' @param x can be a tbl object, data frame or SQL statement
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 #' @export
 
 nrow <- function(x){

@@ -2,13 +2,11 @@
 #' @param ... tbl objects to perform set union
 #' @return returns dplyr tbl object
 #' @export
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 
 junyi.union <- function(...){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   #

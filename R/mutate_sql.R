@@ -8,14 +8,12 @@
 #' \dontrun{
 #' mutate_sql("LAG(date,1) OVER (PARTITION BY user_primary_key ORDER BY date) AS lag_date")
 #' }
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 #' @export
 
 mutate_sql <- function(x, sql){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   x.columns <- view(x, func = "colnames") #get col name

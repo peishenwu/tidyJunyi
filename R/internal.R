@@ -1,6 +1,7 @@
 #' @import bigrquery
-#' @import stringr
 #' @import dplyr
+#' @importFrom stringr 'str_split'
+#' @importFrom stringr 'str_extract_all'
 
 ## below are utility functions
 Ijoin <- function(query1, query2, ON, restore.name = T){
@@ -111,6 +112,7 @@ unique.query <- function(query){
                 GROUP BY ",paste(getQueryColumns(query),collapse = ","),sep=""))
 }#end function
 
+##
 ##utility functions to use for junyi's dplyr alternatives
 
 extract_and_modify_sql <- function(tbl){

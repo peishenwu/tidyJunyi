@@ -15,6 +15,6 @@ build_tbl_from_sql(sql, tablename = NULL)
 returns dplyr tbl object
 }
 \description{
-this function allows manually build tbl objects from input SQL commands
+This function allows manually build tbl objects from input SQL commands
 }
 

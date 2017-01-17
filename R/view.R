@@ -4,14 +4,12 @@
 #' @param title see ?View for details
 #' @param n how many rows to show, by default is 1000. Can be set to Inf if needed
 #' @param func shows view or prints out head or returns colnames
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 #' @export
 
 view <- function(x, title, n = 5000, func = c("view","head","colnames")){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   func <- match.arg(func)

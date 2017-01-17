@@ -6,7 +6,8 @@ Date: 2017-1-11
 Author: Pei-shen Wu
 Maintainer: Pei-shen Wu <peishen.wu@gmail.com>
 Description: Provides an interface for dplyr to interact with Junyi Academy's bigquery datasets
-License: For internal use only
 LazyData: TRUE
+License: None
 RoxygenNote: 5.0.1
-Imports: bigrquery, stringr, dplyr, magrittr
+Imports: bigrquery, stringr, dplyr
+

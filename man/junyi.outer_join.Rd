@@ -18,6 +18,8 @@ junyi.outer_join(x, y, by = NULL, by.x = NULL, by.y = NULL,
 
 \item{by.y}{join by column in argument y}
 
+\item{restore.names}{restore input column names or keep the pre-fix of joined names}
+
 \item{tablename}{if not specified, then a random name will be generated}
 }
 \value{

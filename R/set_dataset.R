@@ -6,7 +6,11 @@
 
 set_dataset <- function(backup.dataset.date, destination.dataset.name){
 
-  tidyJunyi.settings <<- list(destination.dataset = destination.dataset.name,
-                              backup.dataset = backup.dataset.date)
+#   tidyJunyi.settings <<- list(destination.dataset = destination.dataset.name,
+#                               backup.dataset = backup.dataset.date)
+
+  assign("tidyJunyi.settings", list(destination.dataset = destination.dataset.name,
+                                    backup.dataset = backup.dataset.date),
+         envir = .GlobalEnv)
 
 }#end function

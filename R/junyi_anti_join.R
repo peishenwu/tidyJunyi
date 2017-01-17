@@ -8,13 +8,11 @@
 #' @param tablename if not specified, then a random name will be generated
 #' @return returns dplyr tbl object
 #' @export
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 
 junyi.anti_join <- function(x, y, by = NULL, by.x = NULL, by.y = NULL, tablename = NULL){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   #initialize connection

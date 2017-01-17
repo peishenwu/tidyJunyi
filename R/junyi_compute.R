@@ -4,13 +4,11 @@
 #' @param tablename if not specified, then a random name will be generated
 #' @return returns dplyr tbl object
 #' @export
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 
 junyi.compute <- function(x, tablename = NULL){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   ##

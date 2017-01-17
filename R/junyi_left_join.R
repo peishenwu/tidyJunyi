@@ -4,17 +4,16 @@
 #' @param by join by column, can take a vector of names. eg. c("keyID","date)
 #' @param by.x join by column in argument x
 #' @param by.y join by column in argument y
+#' @param restore.names restore input column names or keep the pre-fix of joined names
 #' @param tablename if not specified, then a random name will be generated
 #' @return returns dplyr tbl object
 #' @export
-#' @import bigrquery
-#' @import stringr
-#' @import dplyr
 
 junyi.left_join <- function(x, y, by = NULL, by.x = NULL, by.y = NULL, restore.names = T,
                             tablename = NULL){
 
   ##use global variable
+  tidyJunyi.settings <- get("tidyJunyi.settings")
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   #initialize connection
