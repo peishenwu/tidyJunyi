@@ -5,19 +5,21 @@
 \title{create tbl objects of various junyi bigquery datasets}
 \usage{
 tbl_relation_users_bySameIP(force = F, window.begin = NULL,
-  window.end = NULL)
+  window.end = NULL, load.only = F)
 }
 \arguments{
 \item{force}{create a new data table despite a previous table with a same name already exist}
 
-\item{window.begin}{the date to begin watching, in format yy/mm/dd}
+\item{window.begin}{the date to begin watching, in format yy/mm/dd. If not specified, the beginning date will be the backup.dataset date - 365 days}
 
-\item{window.end}{the date to end watching, in format yy/mm/dd}
+\item{window.end}{the date to end watching, in format yy/mm/dd. If not specified, the end date will be the backup.dataset date}
+
+\item{load.only}{set to true to directly load pre-built tbl without building}
 }
 \value{
 returns dplyr tbl object
 }
 \description{
-users which are from the same IPs used by others during the same day at the same hour (aka. simultaneous users)
+users who are from the same IPs used by others during the same day at the same hour during the past 365 days
 }
 

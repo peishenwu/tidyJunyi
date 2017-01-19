@@ -1,10 +1,11 @@
 #' create tbl objects of various junyi bigquery datasets
 #' @description  relationships between problem(exercise) and it's sub quizes
 #' @param force create a new data table despite a previous table with a same name already exist
+#' @param load.only set to true to directly load pre-built tbl without building
 #' @return returns dplyr tbl object
 #' @export
 
-tbl_relation_prob_quiz <- function(force = F){
+tbl_relation_prob_quiz <- function(force = F, load.only = F){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -25,6 +26,6 @@ tbl_relation_prob_quiz <- function(force = F){
   quiz.count <- paste("SELECT contentID, EXACT_COUNT_DISTINCT(quizID) AS quiz_count FROM (",q.prob,") GROUP BY contentID",sep="")
   q.prob <- Ljoin(q.prob, quiz.count, "contentID")
 
-  return(write_bq_dataset(destination.dataset, tablename, force, q.prob))
+  return(write_bq_dataset(destination.dataset, tablename, force, q.prob, bypass = load.only))
 
 }#end function

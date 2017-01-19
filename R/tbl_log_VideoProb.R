@@ -3,10 +3,11 @@
 #' @param force create a new data table despite a previous table with a same name already exist
 #' @param window.begin the date to begin watching, in format yy/mm/dd
 #' @param window.end the date to end watching, in format yy/mm/dd
+#' @param load.only set to true to directly load pre-built tbl without building
 #' @return returns dplyr tbl object
 #' @export
 
-tbl_log_VideoProb <- function(force = F, window.begin = NULL, window.end = NULL){
+tbl_log_VideoProb <- function(force = F, window.begin = NULL, window.end = NULL, load.only = F){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -125,6 +126,6 @@ tbl_log_VideoProb <- function(force = F, window.begin = NULL, window.end = NULL)
   #check whether table exists, if not then create a new one (unless force is true)
   #as.POSIXct(as.numeric(get_table("junyiacademy","pcboy","tbltsclass")$creationTime)/1000,origin="1970-01-01") %>% as.Date
 
-  return(write_bq_dataset(destination.dataset, tablename, force, q.total))
+  return(write_bq_dataset(destination.dataset, tablename, force, q.total, bypass = load.only))
 
 }#end function

@@ -143,14 +143,19 @@ get_rand_tablename <- function(destination.dataset){
   return(tablename)
 }#end function
 
-write_bq_dataset <- function(destination.dataset, tablename, force, query){
+write_bq_dataset <- function(destination.dataset, tablename, force, query, bypass=F){
 
-  if(force | !is_table_exist(destination.dataset, tablename)){
+  if(force | !is_table_exist(destination.dataset, tablename, bypass)){
     results <- query_exec(query, "junyiacademy", max_pages = 1, page_size = 0, warn = F,
                           destination_table = paste(destination.dataset,".",tablename,sep=""),
                           write_disposition = "WRITE_TRUNCATE") #overwrite
   }else{
-    message(paste("table ",destination.dataset,".",tablename," seems to exist already, loading it now...",sep=""))
+    if(!bypass){
+      message(paste("table ",destination.dataset,".",tablename," seems to exist already, loading it now...",sep=""))
+    }else{
+      message(paste("loading ",destination.dataset,".",tablename,sep=""))
+    }#end if
+
   }#end if
 
   DB <- src_bigquery("junyiacademy", destination.dataset)
@@ -159,24 +164,33 @@ write_bq_dataset <- function(destination.dataset, tablename, force, query){
 }#end function
 
 ##due to only 50 tables will be shown by bq API functions, we manually record temporary tables created
-is_table_exist <- function(destination.dataset, tablename){
+is_table_exist <- function(destination.dataset, tablename, bypass=F){
 
-  job <- insert_upload_job(project = "junyiacademy",
-                           dataset = destination.dataset,
-                           table = "tidyJunyi_tbl_list",
-                           values = data.frame(tablename = tablename, timestamp = Sys.time()),
-                           create_disposition = "CREATE_IF_NEEDED",
-                           write_disposition = "WRITE_APPEND")
 
-  wait_for(job, quiet = T)
+  if(!bypass){
+    job <- insert_upload_job(project = "junyiacademy",
+                             dataset = destination.dataset,
+                             table = "tidyJunyi_tbl_list",
+                             values = data.frame(tablename = tablename,
+                                                 timestamp = Sys.time(),
+                                                 tidyjunyi_version = as.character(packageVersion("tidyJunyi")),
+                                                 client_info = paste(Sys.info(),collapse="___")),
+                             create_disposition = "CREATE_IF_NEEDED",
+                             write_disposition = "WRITE_APPEND")
 
-  #check if count(tablename) > 1 (not including itself) then the name is used before (thus table exist)
-  result <- query_exec(paste("SELECT COUNT(tablename) AS count
-                              FROM ",destination.dataset,".tidyJunyi_tbl_list
-                              WHERE tablename == '",tablename,"'",sep=""),
-                       "junyiacademy", max_pages = 1, warn = F)
+    wait_for(job, quiet = T)
 
-  if(result$count > 1){return(T)}else{return(F)}
+    #check if count(tablename) > 1 (not including itself) then the name is used before (thus table exist)
+    result <- query_exec(paste("SELECT COUNT(tablename) AS count
+                               FROM ",destination.dataset,".tidyJunyi_tbl_list
+                               WHERE tablename == '",tablename,"'",sep=""),
+                         "junyiacademy", max_pages = 1, warn = F)
+
+    if(result$count > 1){return(T)}else{return(F)}
+
+  }else{
+    return(T) ## set bypass is TRUE if already knew tbl exist... to speed up loading
+  }#end if
 
 }#end function
 

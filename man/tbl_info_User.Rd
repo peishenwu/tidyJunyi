@@ -4,10 +4,12 @@
 \alias{tbl_info_User}
 \title{create tbl objects of various junyi bigquery datasets}
 \usage{
-tbl_info_User(force = F)
+tbl_info_User(force = F, load.only = F)
 }
 \arguments{
 \item{force}{create a new data table despite a previous table with a same name already exist}
+
+\item{load.only}{set to true to directly load pre-built tbl without building}
 }
 \value{
 returns dplyr tbl object

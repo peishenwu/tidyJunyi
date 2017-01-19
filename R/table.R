@@ -8,8 +8,8 @@
 table <- function(x, column, n = 5000){
 
   ##use global variable
-  tidyJunyi.settings <- get("tidyJunyi.settings")
-  destination.dataset <- tidyJunyi.settings[['destination.dataset']]
+  #tidyJunyi.settings <- get("tidyJunyi.settings")
+  #destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   ##support for NSE
   parameters <- as.list(match.call())

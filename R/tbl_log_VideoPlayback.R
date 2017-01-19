@@ -1,10 +1,11 @@
 #' create tbl objects of various junyi bigquery datasets
 #' @description  log data of video playback/reverse/forwarding
 #' @param force create a new data table despite a previous table with a same name already exist
+#' @param load.only set to true to directly load pre-built tbl without building
 #' @return returns dplyr tbl object
 #' @export
 
-tbl_log_VideoPlayback <- function(force = F){
+tbl_log_VideoPlayback <- function(force = F, load.only = F){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -65,6 +66,6 @@ tbl_log_VideoPlayback <- function(force = F){
   q.video <- Ljoin(q.video, q.videoInfo, "eventID")
 
   ##
-  return(write_bq_dataset(destination.dataset, tablename, force, q.video))
+  return(write_bq_dataset(destination.dataset, tablename, force, q.video, bypass = load.only))
 
 }#end function

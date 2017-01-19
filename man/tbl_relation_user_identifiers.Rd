@@ -4,10 +4,12 @@
 \alias{tbl_relation_user_identifiers}
 \title{creates a tbl containing various user identifiers}
 \usage{
-tbl_relation_user_identifiers(force = F)
+tbl_relation_user_identifiers(force = F, load.only = F)
 }
 \arguments{
 \item{force}{create a new data table despite a previous table with a same name already exist}
+
+\item{load.only}{set to true to directly load pre-built tbl without building}
 }
 \value{
 returns dplyr tbl object

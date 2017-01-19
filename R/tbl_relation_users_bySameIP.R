@@ -1,13 +1,14 @@
 #' create tbl objects of various junyi bigquery datasets
-#' @description  users which are from the same IPs used by others during the same day at the same hour (aka. simultaneous users)
+#' @description  users who are from the same IPs used by others during the same day at the same hour during the past 365 days
 #' @param force create a new data table despite a previous table with a same name already exist
-#' @param window.begin the date to begin watching, in format yy/mm/dd
-#' @param window.end the date to end watching, in format yy/mm/dd
+#' @param window.begin the date to begin watching, in format yy/mm/dd. If not specified, the beginning date will be the backup.dataset date - 365 days
+#' @param window.end the date to end watching, in format yy/mm/dd. If not specified, the end date will be the backup.dataset date
+#' @param load.only set to true to directly load pre-built tbl without building
 #' @return returns dplyr tbl object
 #' @export
 #'
 
-tbl_relation_users_bySameIP <- function(force = F, window.begin = NULL, window.end = NULL){
+tbl_relation_users_bySameIP <- function(force = F, window.begin = NULL, window.end = NULL, load.only = F){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -19,21 +20,26 @@ tbl_relation_users_bySameIP <- function(force = F, window.begin = NULL, window.e
 
   ##prepare
   dataset.date <- as.Date(dataset.date)
-  dataset.date <- gsub("-|/","",dataset.date)
+
   ##
   window.q.condition <- "ip_address IS NOT NULL"
   if(length(window.begin)!=0){
     window.begin <- as.Date(window.begin)
     window.begin <- gsub("/","-",window.begin)
     window.q.condition <- c(window.q.condition, paste("_timestamp >= TIMESTAMP('",window.begin,"')",sep=""))
+  }else{
+    window.q.condition <- c(window.q.condition, paste("_timestamp >= TIMESTAMP('",as.character(dataset.date-365),"')",sep=""))
   }#end if
 
   if(length(window.end)!=0){
     window.end <- as.Date(window.end)
     window.end <- gsub("/","-",window.end)
-    window.q.condition <- c(window.q.condition, paste("_timestamp <= TIMESTAMP('",window.end,"')",sep=""))
+    window.q.condition <- c(window.q.condition, paste("_timestamp <= TIMESTAMP('",dataset.date,"')",sep=""))
+  }else{
+
   }#end if
 
+  dataset.date <- gsub("-|/","",dataset.date)
   ##
   q.IP.video <- paste("SELECT user.email AS dot_email, ip_address AS IP,
                               DATE(DATE_ADD(time_watched, 8, 'HOUR')) AS date,
@@ -94,6 +100,6 @@ tbl_relation_users_bySameIP <- function(force = F, window.begin = NULL, window.e
                           END AS weekday,
                           hour, other_user_count FROM (",result,")",sep="")
   ##
-  return(write_bq_dataset(destination.dataset, tablename, force, result))
+  return(write_bq_dataset(destination.dataset, tablename, force, result, bypass = load.only))
 
 }#end function

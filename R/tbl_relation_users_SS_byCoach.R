@@ -1,11 +1,12 @@
 #' create tbl objects of various junyi bigquery datasets
 #' @description  student and student relationships, defined by coach-trainee relationship (having a common teacher)
 #' @param force create a new data table despite a previous table with a same name already exist
+#' @param load.only set to true to directly load pre-built tbl without building
 #' @return returns dplyr tbl object
 #' @export
 #'
 
-tbl_relation_users_SS_byCoach <- function(force = F){
+tbl_relation_users_SS_byCoach <- function(force = F, load.only = F){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -34,7 +35,7 @@ tbl_relation_users_SS_byCoach <- function(force = F){
 
   #check whether table exists, if not then create a new one (unless force is true)
   return(write_bq_dataset(destination.dataset, tablename, force,
-                          student_student_relation))
+                          student_student_relation, bypass = load.only))
 
 }#end function
 

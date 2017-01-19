@@ -1,10 +1,11 @@
 #' create tbl objects of various junyi bigquery datasets
 #' @description  detailed log data of problem(exercise) usage, the unit of each row is each prob's quiz
 #' @param force create a new data table despite a previous table with a same name already exist
+#' @param load.only set to true to directly load pre-built tbl without building
 #' @return returns dplyr tbl object
 #' @export
 
-tbl_log_ProbQuiz <- function(force = F){
+tbl_log_ProbQuiz <- function(force = F, load.only = F){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -33,6 +34,6 @@ tbl_log_ProbQuiz <- function(force = F){
                             proficiency_status, total_time_consumed, total_attempt_count, hint_count, is_hint_used,
                             exam_mode, topic_mode, review_mode, pretest_mode",sep="")
 
-  return(write_bq_dataset(destination.dataset, tablename, force, q.prob))
+  return(write_bq_dataset(destination.dataset, tablename, force, q.prob, bypass = load.only))
 
 }#end function

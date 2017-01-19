@@ -2,10 +2,11 @@
 #' @description  user's background data, the primary key of this table is user_primary_key
 #' @details while most variables are unique for each user, fields userRole, userCity, userSchool exist multiple values, in which are separated by comma ","
 #' @param force create a new data table despite a previous table with a same name already exist
+#' @param load.only set to true to directly load pre-built tbl without building
 #' @return returns dplyr tbl object
 #' @export
 
-tbl_info_User <- function(force = F){
+tbl_info_User <- function(force = F, load.only = F){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -157,6 +158,6 @@ tbl_info_User <- function(force = F){
   #result <- unique.query(result)
 
   #check whether table exists, if not then create a new one (unless force is true)
-  return(write_bq_dataset(destination.dataset, tablename, force, result))
+  return(write_bq_dataset(destination.dataset, tablename, force, result, bypass = load.only))
 
 }#end function

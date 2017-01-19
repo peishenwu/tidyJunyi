@@ -4,7 +4,8 @@
 \alias{tbl_log_VideoProb}
 \title{create tbl objects of various junyi bigquery datasets}
 \usage{
-tbl_log_VideoProb(force = F, window.begin = NULL, window.end = NULL)
+tbl_log_VideoProb(force = F, window.begin = NULL, window.end = NULL,
+  load.only = F)
 }
 \arguments{
 \item{force}{create a new data table despite a previous table with a same name already exist}
@@ -12,6 +13,8 @@ tbl_log_VideoProb(force = F, window.begin = NULL, window.end = NULL)
 \item{window.begin}{the date to begin watching, in format yy/mm/dd}
 
 \item{window.end}{the date to end watching, in format yy/mm/dd}
+
+\item{load.only}{set to true to directly load pre-built tbl without building}
 }
 \value{
 returns dplyr tbl object

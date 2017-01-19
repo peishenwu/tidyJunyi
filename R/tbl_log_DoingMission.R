@@ -1,10 +1,11 @@
 #' create tbl objects of various junyi bigquery datasets
 #' @description  log data of doing mission contents, the minimal time unit for each row is every 10 mins. The primary key for each mission is missionID, for each content is contentID
 #' @param force create a new data table despite a previous table with a same name already exist
+#' @param load.only set to true to directly load pre-built tbl without building
 #' @return returns dplyr tbl object
 #' @export
 
-tbl_log_DoingMission <- function(force = F){
+tbl_log_DoingMission <- function(force = F, load.only = F){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -67,7 +68,7 @@ tbl_log_DoingMission <- function(force = F){
   complete.mission.q <- unique.query(complete.mission.q)
 
   ##
-  return(write_bq_dataset(destination.dataset, tablename, force, complete.mission.q))
+  return(write_bq_dataset(destination.dataset, tablename, force, complete.mission.q, bypass = load.only))
 
 }#end function
 
