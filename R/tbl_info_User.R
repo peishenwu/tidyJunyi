@@ -14,7 +14,7 @@ tbl_info_User <- function(force = F, load.only = F){
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 
   #output table name
-  tablename = "infousrdat"
+  tablename = "Info_UserData"
 
   ##prepare
   dataset.date <- as.Date(dataset.date)

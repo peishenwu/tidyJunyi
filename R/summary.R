@@ -13,9 +13,11 @@ summary <- function(x, column){
 
     ##
     sql <- extract_and_modify_sql(x)
-    sql <- paste("SELECT MIN(",column,") AS Min, NTH(2,QUANTILES(",column,",5)) AS Q1,
-                         NTH(3,QUANTILES(",column,",5)) AS Median, AVG(",column,") AS Mean,
-                         NTH(4,QUANTILES(",column,",5)) AS Q3, MAX(",column,") AS max
+    sql <- paste("SELECT MIN(",column,") AS Min, NTH(25,QUANTILES(",column,",101)) AS Q25,
+                         NTH(50,QUANTILES(",column,",101)) AS Median, AVG(",column,") AS Mean,
+                         NTH(75,QUANTILES(",column,",101)) AS Q75, MAX(",column,") AS Max,
+                         NTH(33,QUANTILES(",column,",101)) AS Q33,
+                         NTH(66,QUANTILES(",column,",101)) AS Q66
                   FROM (",sql,")",sep="")
 
     results <- query_exec(sql, "junyiacademy",
@@ -23,7 +25,7 @@ summary <- function(x, column){
                           page_size = 1000,
                           warn = F)
 
-    names(results) <- c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
+    names(results) <- c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.", "33%","66%")
     return(results)
 
   }else{

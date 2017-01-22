@@ -11,7 +11,6 @@ nrow <- function(x){
     ##if SQL statement
     if(sum("character" == class(x))!=0){sql <- x}
 
-    #
     sql <- paste("SELECT count(*) AS nrow FROM (",sql,")",sep="")
     results <- query_exec(sql, "junyiacademy",
                           max_pages = 1,

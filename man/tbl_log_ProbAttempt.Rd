@@ -15,6 +15,6 @@ tbl_log_ProbAttempt(force = F, load.only = F)
 returns dplyr tbl object
 }
 \description{
-detailed log data of problem(exercise) usage, the unit of each row is each "attempt"
+detailed log data of problem(exercise) usage, the unit of each row is each "attempt" of {eventID, quizID} key
 }
 

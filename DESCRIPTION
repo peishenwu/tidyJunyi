@@ -1,8 +1,8 @@
 Package: tidyJunyi
 Type: Package
 Title: junyi bigquery interface package, based on tidy data principles
-Version: 0.4
-Date: 2017-1-18
+Version: 0.45
+Date: 2017-1-20
 Author: Pei-shen Wu
 Maintainer: Pei-shen Wu <peishen.wu@gmail.com>
 Description: Provides an interface for dplyr to interact with Junyi Academy's bigquery datasets

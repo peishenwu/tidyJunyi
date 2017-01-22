@@ -13,7 +13,7 @@ tbl_log_AssignMission <- function(force = F, load.only = F){
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 
   #output table name (a-z, lower case, 10 characters)
-  tablename = "logasnmssn"
+  tablename = "Log_AssignMission"
   #
   assign.mission.q1 <- "SELECT assigner_id AS from_userID, mission_id AS missionID, assignee_id AS to_userID,
                                DATE(DATE_ADD(timestamp, 8, 'HOUR')) AS date,

@@ -14,7 +14,7 @@ tbl_relation_users_SS_byCoach <- function(force = F, load.only = F){
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 
   #output table name
-  tablename = "relsscoach"
+  tablename = "Relation_StudentStudent_byCoach"
 
   ##prepare
   dataset.date <- as.Date(dataset.date)

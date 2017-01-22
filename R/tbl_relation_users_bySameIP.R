@@ -16,7 +16,7 @@ tbl_relation_users_bySameIP <- function(force = F, window.begin = NULL, window.e
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 
   #output table name
-  tablename = "relusersip"
+  tablename = "Relation_Users_byIP"
 
   ##prepare
   dataset.date <- as.Date(dataset.date)

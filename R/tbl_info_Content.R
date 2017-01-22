@@ -12,7 +12,7 @@ tbl_info_Content <- function(force = F, load.only = F){
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   #output table name
-  tablename = "infocontnt"
+  tablename = "Info_Content"
 
   ##
   max_time.q <- "SELECT MAX(make_default_time) AS make_default_time FROM [FinalTable.ContentFinalInfo]"

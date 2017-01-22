@@ -15,7 +15,7 @@ tbl_log_VideoProb <- function(force = F, window.begin = NULL, window.end = NULL,
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 
   #output table name (a-z, lower case, 10 characters)
-  tablename = "logvidprob"
+  tablename = "Log_VideoProblem"
 
   ##prepare
   dataset.date <- as.Date(dataset.date)

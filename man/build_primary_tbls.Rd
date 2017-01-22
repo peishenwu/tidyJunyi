@@ -4,12 +4,19 @@
 \alias{build_primary_tbls}
 \title{build all tidy tbls}
 \usage{
-build_primary_tbls(force = F, load.only = F)
+build_primary_tbls(force = F, load.only = F, info = T, log = T,
+  relation = T)
 }
 \arguments{
 \item{force}{create a new data table despite a previous table with a same name already exist}
 
 \item{load.only}{set to true to directly load pre-built tbls without building them}
+
+\item{info}{load info tables}
+
+\item{log}{load log tables}
+
+\item{relation}{load relation tables}
 }
 \value{
 returns dplyr tbl object

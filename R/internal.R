@@ -122,7 +122,9 @@ extract_and_modify_sql <- function(tbl){
   ##
 
   sql <- gsub("\n"," ",(as.character(sql_render(tbl))))
-  tablenames <- str_extract_all(sql,"FROM \\[[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]\\]")[[1]]
+  #tablenames <- str_extract_all(sql,"FROM \\[[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]\\]")[[1]] ##10 characters of a-z for compatibility with dplyr
+  tablenames <- str_extract_all(sql,"FROM \\[.*?\\]")[[1]]  #non-greedy matching the first occurance,
+                                                            #ref: http://stackoverflow.com/questions/6208367/regex-to-match-stuff-between-parentheses
   tablenames <- gsub("\\[|\\]|FROM|[[:space:]]","",tablenames)
   replacenames <- paste(destination.dataset,".",tablenames,sep="")
 

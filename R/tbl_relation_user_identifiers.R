@@ -13,7 +13,7 @@ tbl_relation_user_identifiers <- function(force = F, load.only = F){
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 
   #output table name (a-z, lower case, 10 characters)
-  tablename = "relusriden"
+  tablename = "Relation_Users_Identification"
 
   sql <- user_connector_tbl(dataset.date,
                             use.keyID = T, use.uEmail = T,

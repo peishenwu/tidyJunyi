@@ -13,7 +13,7 @@ tbl_relation_prob_quiz <- function(force = F, load.only = F){
   dataset.date <- tidyJunyi.settings[['backup.dataset']]
 
   #output table name (a-z, lower case, 10 characters)
-  tablename = "relprobquz"
+  tablename = "Relation_ProblemQuiz"
 
   ##prepare
   dataset.date <- as.Date(dataset.date)

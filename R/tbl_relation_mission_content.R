@@ -12,7 +12,7 @@ tbl_relation_mission_content <- function(force = F, load.only = F){
   destination.dataset <- tidyJunyi.settings[['destination.dataset']]
 
   #output table name (a-z, lower case, 10 characters)
-  tablename = "relmsncont"
+  tablename = "Relation_MissionContent"
   #
   mission.q1 <- "SELECT mission_id AS missionID,
                         REGEXP_REPLACE(split(LTRIM(RTRIM(task_id_list,']'),'['),','),'\"|\\'| ','') AS contentID
@@ -48,7 +48,8 @@ tbl_relation_mission_content <- function(force = F, load.only = F){
   ##
   mission.q <- unique.query(mission.q)
   mission.q <- paste("SELECT missionID, contentID, content_pretty_name, content_kind, content_live,
-                             IFNULL(INTEGER(video_count),0) AS video_count, IFNULL(INTEGER(prob_count),0) AS prob_count
+                             IFNULL(INTEGER(video_count),0) AS mission_video_count,
+                             IFNULL(INTEGER(prob_count),0) AS mission_prob_count
                       FROM (",mission.q,") ORDER BY missionID")
   ##
   return(write_bq_dataset(destination.dataset, tablename, force, mission.q, bypass = load.only))
