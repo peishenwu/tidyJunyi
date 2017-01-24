@@ -12,11 +12,11 @@ build_primary_tbls(force = F, load.only = F, info = T, log = T,
 
 \item{load.only}{set to true to directly load pre-built tbls without building them}
 
-\item{info}{load info tables}
+\item{info}{include info tables}
 
-\item{log}{load log tables}
+\item{log}{include log tables}
 
-\item{relation}{load relation tables}
+\item{relation}{include relation tables}
 }
 \value{
 returns dplyr tbl object

@@ -5,7 +5,7 @@
 \title{load all pre-built tables}
 \usage{
 load_primary_tbls(backup.dataset.date = NULL, source.dataset = "tidy_data",
-  tmp.dataset = "tidy_tmp")
+  tmp.dataset = "tidy_tmp", info = T, log = T, relation = T)
 }
 \arguments{
 \item{backup.dataset.date}{the latest date of the dataset junyi_yymmdd on bigquery. If not specified, then the most recent previous Monday's date will be used.}
@@ -13,6 +13,12 @@ load_primary_tbls(backup.dataset.date = NULL, source.dataset = "tidy_data",
 \item{source.dataset}{the dataset where the pre-built tidy tbls are located}
 
 \item{tmp.dataset}{a temporary dataset in which user has access to read and write tables}
+
+\item{info}{load info tables}
+
+\item{log}{load log tables}
+
+\item{relation}{load relation tables}
 }
 \value{
 returns dplyr tbl object

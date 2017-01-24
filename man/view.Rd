@@ -4,7 +4,7 @@
 \alias{view}
 \title{helper functions that make tbl objects like data.frames}
 \usage{
-view(x, title, n = 5000, func = c("view", "head", "colnames"))
+view(x, title, n = 5000, func = c("view", "head", "colnames", "data.frame"))
 }
 \arguments{
 \item{x}{see ?View for details, this can also be tbl objects}
@@ -13,7 +13,7 @@ view(x, title, n = 5000, func = c("view", "head", "colnames"))
 
 \item{n}{how many rows to show, by default is 1000. Can be set to Inf if needed}
 
-\item{func}{shows view or prints out head or returns colnames}
+\item{func}{shows view or prints out head or returns colnames or data.frame}
 }
 \description{
 an alternative View which works for tbl objects

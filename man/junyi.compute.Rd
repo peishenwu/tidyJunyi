@@ -4,12 +4,14 @@
 \alias{junyi.compute}
 \title{A workable alternative for dplyr::compute to use in junyi bigquery datasets}
 \usage{
-junyi.compute(x, tablename = NULL)
+junyi.compute(x, tablename = NULL, dataset.name = NULL)
 }
 \arguments{
-\item{x}{a tbl object to be computed, the results will be saved into a temporary dataset}
+\item{x}{a tbl object to be computed}
 
 \item{tablename}{if not specified, then a random name will be generated}
+
+\item{dataset.name}{the dataset name, if not given, then the dataset parameters must be defined by set_dataset()}
 }
 \value{
 returns dplyr tbl object

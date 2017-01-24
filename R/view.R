@@ -3,10 +3,10 @@
 #' @param x see ?View for details, this can also be tbl objects
 #' @param title see ?View for details
 #' @param n how many rows to show, by default is 1000. Can be set to Inf if needed
-#' @param func shows view or prints out head or returns colnames
+#' @param func shows view or prints out head or returns colnames or data.frame
 #' @export
 
-view <- function(x, title, n = 5000, func = c("view","head","colnames")){
+view <- function(x, title, n = 5000, func = c("view","head","colnames","data.frame")){
 
   ##use global variable
   tidyJunyi.settings <- get("tidyJunyi.settings")
@@ -18,6 +18,7 @@ view <- function(x, title, n = 5000, func = c("view","head","colnames")){
   if(sum("tbl_bigquery" == class(x))!=0){
     res <- nrow(x)
     if(res>5000 & n == 5000 & func == "view"){message(paste("response has ",res," rows, only top 5000 rows are shown, use n = Inf to retrieve all",sep = ""))}
+    if(res>n & func == "data.frame"){message(paste("response has ",res," rows, only ",n," rows are shown, use n = Inf to retrieve all",sep = ""))}
 
     sql <- extract_and_modify_sql(x)
     sql <- paste("SELECT * FROM (",sql,") ",ifelse(n == Inf,"",paste("LIMIT ",n,sep="")),sep="")
@@ -44,6 +45,10 @@ view <- function(x, title, n = 5000, func = c("view","head","colnames")){
 
     if(func == "colnames"){
       return(colnames(results))
+    }#end if
+
+    if(func == "data.frame"){
+      results
     }#end if
 
   }else{

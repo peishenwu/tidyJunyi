@@ -3,11 +3,11 @@
 #' @param x see ?head for details, this can also be tbl objects
 #' @export
 
-head <- function(x){
+head <- function(x, ...){
   if(sum("tbl_bigquery" == class(x))!=0){
     view(x, func = "head")
   }else{
-    utils::head(x)
+    utils::head(x, ...)
   }#end if
 }#end function
 

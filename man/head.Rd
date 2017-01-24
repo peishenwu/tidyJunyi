@@ -4,7 +4,7 @@
 \alias{head}
 \title{helper functions that make tbl objects like data.frames}
 \usage{
-head(x)
+head(x, ...)
 }
 \arguments{
 \item{x}{see ?head for details, this can also be tbl objects}

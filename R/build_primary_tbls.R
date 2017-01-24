@@ -1,9 +1,9 @@
 #' build all tidy tbls
 #' @param force create a new data table despite a previous table with a same name already exist
 #' @param load.only set to true to directly load pre-built tbls without building them
-#' @param info load info tables
-#' @param log load log tables
-#' @param relation load relation tables
+#' @param info include info tables
+#' @param log include log tables
+#' @param relation include relation tables
 #' @return returns dplyr tbl object
 #' @export
 
